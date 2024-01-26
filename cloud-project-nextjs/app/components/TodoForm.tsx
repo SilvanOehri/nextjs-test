@@ -22,13 +22,13 @@ export default function TodoForm() {
         if (result.type === "success") {
             toast.success(result.message)
         }
-        else if (result.type === "error") {
+        else if (result.type) {
             toast.error(result.message)
         }
     }, [result])
 
     return (
-        <form action={action} className="flex flex-col items-center">
+        <form action={action} className="flex flex-col items-center w-1/3 mt-0">
           <Label className="text-5xl mb-4">Create new Todo</Label>
           <Input name="newTodo" className="mb-4 text-2xl" placeholder="title..." required></Input>
           <Button type='submit' className="w-full text-3xl mb-4">Add Todo</Button>

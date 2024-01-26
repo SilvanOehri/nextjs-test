@@ -1,11 +1,27 @@
+"use client"
+
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Task } from '@prisma/client'
-import React from 'react'
+import { Trash } from 'lucide-react'
+import removeTodo from './removeTodo'
+import toast from 'react-hot-toast'
 
-export default async function NewTodo({todo}: {todo: Task}) {
+export default function NewTodo({ todo }: { todo: Task }) {
+  const handleRemoveTodo = async () => {
+    try {
+      await removeTodo(todo.id);
+
+      toast.success('Todo removed successfully')
+    } catch (error) {
+      
+      toast.error('Error removing todo')
+    }
+  };
+
   return (
-    <h1>{todo.title}</h1>
-  )
+    <div className='bg-grey-500 flex justify-between w-1/3 p-4 bg-gray-100 mt-5 rounded-md'>
+      <h1 className='text-2xl'>{todo.title}</h1>
+      <Button onClick={handleRemoveTodo}><Trash /></Button>
+    </div>
+  );
 }
-
-
-
